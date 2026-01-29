@@ -11,6 +11,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import TodoList from '../components/TodoList';
 import AddTodo from '../components/AddTodo';
+import RandomQuote from '../components/RandomQuote';
 import { colors } from '../styles/colors';
 
 const STORAGE_KEY = '@todos';
@@ -26,10 +27,9 @@ export default function HomeScreen({ navigation }) {
 
     // Refresh todos when returning from detail screen
     useEffect(() => {
-        const unsubscribe = navigation.addListener('focus', () => {
+        return navigation.addListener('focus', () => {
             loadTodos();
         });
-        return unsubscribe;
     }, [navigation]);
 
     // Save todos to storage whenever they change
@@ -135,6 +135,9 @@ export default function HomeScreen({ navigation }) {
                         </View>
                     </View>
                 )}
+
+                {/* Random Quote */}
+                <RandomQuote />
 
                 {/* Add todo input */}
                 <AddTodo onAdd={addTodo} />
